@@ -163,8 +163,4 @@ if [ "$(basename "$SHELL")" != "zsh" ]; then
     chsh -s $(which zsh)
 fi
 
-if [ ! -f "$HOME/default_install.sh" ]; then
-    sudo rm $HOME/default_install.sh
-fi
-
 echo "Installation terminée. Veuillez redémarrer votre terminal ou exécuter 'source ~/.zshrc' pour appliquer les changements."
