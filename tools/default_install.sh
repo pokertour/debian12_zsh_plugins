@@ -14,7 +14,7 @@ if ! is_installed sudo; then
 fi
 
 # Installer gpg si ce n'est pas déjà fait
-if ! is_installed zsh; then
+if ! is_installed gpg; then
     sudo apt install -y gpg
 fi
 
