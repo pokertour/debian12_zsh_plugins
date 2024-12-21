@@ -128,6 +128,15 @@ if ! grep -q "fastfetch" $ZSHRC; then
     echo 'fastfetch' >> $ZSHRC
 fi
 
+# Télécharger et configurer fastfetch
+FASTFETCH_CONFIG_DIR="$HOME/fastfetch"
+FASTFETCH_CONFIG_FILE="$FASTFETCH_CONFIG_DIR/config.jsonc"
+if [ ! -f "$FASTFETCH_CONFIG_FILE" ]; then
+    mkdir -p $FASTFETCH_CONFIG_DIR
+    wget -qO $FASTFETCH_CONFIG_FILE https://raw.githubusercontent.com/pokertour/debian12_zsh_plugins/refs/heads/main/configs/fastfetch/base.jsonc
+fi
+
+
 # Créer le fichier ~/.zsh/aliases.zsh s'il n'existe pas
 ALIASES_FILE=$HOME/.zsh/aliases.zsh
 if [ ! -f "$ALIASES_FILE" ]; then
