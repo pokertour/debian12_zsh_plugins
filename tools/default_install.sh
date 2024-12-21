@@ -48,6 +48,11 @@ if ! is_installed eza; then
     sudo apt install -y eza
 fi
 
+# Installer eza si ce n'est pas déjà fait
+if ! is_installed bat; then
+    sudo apt install -y bat
+fi
+
 # Cloner les plugins zsh si ce n'est pas déjà fait
 ZSH_CUSTOM=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
 
@@ -65,6 +70,10 @@ fi
 
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autocomplete" ]; then
     git clone --depth 1 https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM/plugins/zsh-autocomplete
+fi
+
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-bat" ]; then
+    git clone https://github.com/fdellwing/zsh-bat.git $ZSH_CUSTOM/plugins/zsh-bat
 fi
 
 # Cloner eza dans un sous-dossier de $ZSH_CUSTOM
@@ -104,7 +113,7 @@ if grep -q "^plugins=" $ZSHRC; then
     existing_plugins=$(grep "^plugins=" $ZSHRC | sed 's/plugins=(\(.*\))/\1/')
 
     # Ajouter les nouveaux plugins s'ils ne sont pas déjà présents
-    new_plugins="git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete"
+    new_plugins="git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete zsh-bat"
     for plugin in $new_plugins; do
         if ! echo $existing_plugins | grep -q "\<$plugin\>"; then
             existing_plugins="$existing_plugins $plugin"
@@ -115,7 +124,7 @@ if grep -q "^plugins=" $ZSHRC; then
     sed -i "/^plugins=/c\plugins=($existing_plugins)" $ZSHRC
 else
     # Ajouter la ligne plugins si elle n'existe pas
-    echo 'plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)' >> $ZSHRC
+    echo 'plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete zsh-bat)' >> $ZSHRC
 fi
 
 # Ajouter le chemin de complétion pour eza
